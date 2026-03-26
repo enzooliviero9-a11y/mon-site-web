@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charles Rénovation — Rénovation Générale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2C3E50;--primary-light:#34495E;--primary-dark:#1A252F;--light:#f4f6f8;--dark:#1a1a2e;--white:#fff;--accent:#E67E22}
+body{font-family:'Inter',sans-serif;color:var(--dark);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+.nav{background:var(--white);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 15px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--primary)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+.hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--primary-light));color:var(--white);padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E")}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem;margin-bottom:1rem;position:relative}
+.hero p{font-size:1.15rem;opacity:.9;max-width:600px;margin:0 auto 2rem;position:relative}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+.hero-btn{display:inline-block;background:var(--accent);color:var(--white);padding:1rem 2.5rem;border-radius:6px;font-weight:700;font-size:1.05rem;transition:transform .3s}
+.hero-btn:hover{transform:translateY(-2px)}
+.hero-btn-alt{display:inline-block;background:rgba(255,255,255,.15);color:var(--white);padding:1rem 2.5rem;border-radius:6px;font-weight:600;border:2px solid rgba(255,255,255,.3);transition:background .3s}
+.hero-btn-alt:hover{background:rgba(255,255,255,.25)}
+
+.garanties{padding:3rem 2rem;background:var(--light);display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;text-align:center}
+.garantie{font-weight:600;font-size:.9rem}
+.garantie strong{display:block;font-size:1.6rem;color:var(--primary);font-family:'Playfair Display',serif;font-weight:800}
+
+.services{padding:5rem 2rem;text-align:center}
+.section-title{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:800;margin-bottom:.5rem;color:var(--primary-dark)}
+.section-sub{color:#888;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.service-card{background:var(--white);border-radius:12px;padding:2rem 1.5rem;text-align:left;border-top:4px solid var(--primary);box-shadow:0 4px 20px rgba(44,62,80,.08);transition:transform .3s}
+.service-card:hover{transform:translateY(-4px)}
+.service-icon{font-size:2rem;margin-bottom:.8rem}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--primary-dark)}
+.service-card p{font-size:.9rem;color:#666}
+
+.realisations{padding:5rem 2rem;background:var(--light);text-align:center}
+.real-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.real-item{aspect-ratio:16/10;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:'Playfair Display',serif;font-size:1.1rem}
+
+.devis{padding:5rem 2rem;background:var(--accent);color:var(--white);text-align:center}
+.devis h2{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:800;margin-bottom:1rem}
+.devis p{font-size:1.1rem;opacity:.9;margin-bottom:2rem}
+.devis-btn{display:inline-block;background:var(--white);color:var(--accent);padding:1rem 2.5rem;border-radius:6px;font-weight:700;font-size:1.05rem;transition:transform .3s}
+.devis-btn:hover{transform:translateY(-2px)}
+
+.contact{padding:5rem 2rem;text-align:center}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:800px;margin:2rem auto 0}
+.contact-card{background:var(--light);padding:1.5rem;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.contact-card h3{color:var(--primary);font-size:.95rem;margin-bottom:.3rem}
+.contact-card p{font-size:.9rem;color:#555}
+
+footer{background:var(--primary-dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer .f-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+footer p{opacity:.6;font-size:.85rem}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+  .nav-links{display:none}
+  .hero-btns{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Charles <span>Rénovation</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#devis">Devis gratuit</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Votre projet de<br>rénovation commence ici</h1>
+  <p>Entreprise de rénovation générale à votre service. Intérieur, extérieur, peinture, isolation — un savoir-faire complet pour transformer votre habitat.</p>
+  <div class="hero-btns">
+    <a href="#devis" class="hero-btn">Devis gratuit</a>
+    <a href="#contact" class="hero-btn-alt">Nous contacter</a>
+  </div>
+</section>
+
+<div class="garanties">
+  <div class="garantie"><strong>15+</strong>ans d'expérience</div>
+  <div class="garantie"><strong>500+</strong>chantiers réalisés</div>
+  <div class="garantie"><strong>48h</strong>devis sous 48h</div>
+  <div class="garantie"><strong>10 ans</strong>garantie décennale</div>
+</div>
+
+<section class="services" id="services">
+  <h2 class="section-title">Nos services</h2>
+  <p class="section-sub">Des solutions complètes pour tous vos projets de rénovation</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Rénovation intérieure</h3>
+      <p>Réaménagement complet de vos espaces intérieurs : cloisons, faux plafonds, agencement et finitions soignées.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Rénovation extérieure</h3>
+      <p>Ravalement de façade, réfection de toiture, terrasses et aménagements extérieurs pour embellir votre bien.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Peinture</h3>
+      <p>Peinture intérieure et extérieure, enduits décoratifs, laquage et traitement de surfaces pour un rendu impeccable.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧱</div>
+      <h3>Plâtrerie</h3>
+      <p>Pose de plaques de plâtre, cloisons sèches, faux plafonds, enduits de lissage et finitions haut de gamme.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪵</div>
+      <h3>Revêtements de sols</h3>
+      <p>Parquet, carrelage, sol vinyle, béton ciré — pose et rénovation de tous types de revêtements de sol.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧊</div>
+      <h3>Isolation</h3>
+      <p>Isolation thermique et phonique : combles, murs, planchers. Amélioration du confort et des performances énergétiques.</p>
+    </div>
+  </div>
+</section>
+
+<section class="realisations" id="realisations">
+  <h2 class="section-title">Réalisations</h2>
+  <p class="section-sub">Quelques projets récents</p>
+  <div class="real-grid">
+    <div class="real-item" style="background:linear-gradient(135deg,#2C3E50,#5D6D7E)">Rénovation appartement haussmannien</div>
+    <div class="real-item" style="background:linear-gradient(135deg,#1A252F,#2C3E50)">Ravalement façade immeuble</div>
+    <div class="real-item" style="background:linear-gradient(135deg,#34495E,#7F8C8D)">Isolation combles maison</div>
+  </div>
+</section>
+
+<section class="devis" id="devis">
+  <h2>Devis gratuit sous 48h</h2>
+  <p>Décrivez votre projet de rénovation, nous vous recontactons rapidement avec un devis détaillé et sans engagement.</p>
+  <a href="#contact" class="devis-btn">Demander un devis</a>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-sub">Parlons de votre projet</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>📞 Téléphone</h3>
+      <p>01 23 45 67 89</p>
+    </div>
+    <div class="contact-card">
+      <h3>📧 Email</h3>
+      <p>contact@charles-renovation.fr</p>
+    </div>
+    <div class="contact-card">
+      <h3>📍 Zone d'intervention</h3>
+      <p>Paris et Île-de-France</p>
+    </div>
+    <div class="contact-card">
+      <h3>🕐 Disponibilité</h3>
+      <p>Lun-Ven : 8h-18h / Sam : 9h-13h</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-name">Charles Rénovation</p>
+  <p>SIRET 321 654 987 00015 — Assurance décennale</p>
+  <p>© 2026 Charles Rénovation. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
