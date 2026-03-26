@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plombier Martin — Plomberie & Chauffage</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#1565C0;--primary-light:#1E88E5;--primary-dark:#0D47A1;--light:#f0f6ff;--dark:#1a1a2e;--white:#fff;--urgent:#E53935}
+body{font-family:'Poppins',sans-serif;color:var(--dark);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+.topbar{background:var(--urgent);color:var(--white);text-align:center;padding:.6rem 1rem;font-size:.85rem;font-weight:600}
+.topbar span{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+.nav{background:var(--white);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 15px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
+.nav-logo{font-size:1.4rem;font-weight:800;color:var(--primary)}
+.nav-logo span{color:var(--primary-light)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+.hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--primary-light));color:var(--white);padding:5rem 2rem;position:relative;overflow:hidden}
+.hero-inner{max-width:700px}
+.hero-urgent{display:inline-block;background:var(--urgent);padding:.4rem 1.2rem;border-radius:50px;font-size:.8rem;font-weight:700;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:1rem}
+.hero p{font-size:1.1rem;opacity:.9;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-phone{display:inline-flex;align-items:center;gap:.5rem;background:var(--urgent);color:var(--white);padding:1rem 2rem;border-radius:8px;font-weight:700;font-size:1.1rem;transition:transform .3s}
+.btn-phone:hover{transform:scale(1.05)}
+.btn-devis{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);color:var(--white);padding:1rem 2rem;border-radius:8px;font-weight:600;border:2px solid rgba(255,255,255,.3);transition:background .3s}
+.btn-devis:hover{background:rgba(255,255,255,.25)}
+
+.garanties{padding:3rem 2rem;background:var(--light);display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;text-align:center}
+.garantie{font-weight:600;font-size:.9rem}
+.garantie strong{display:block;font-size:1.6rem;color:var(--primary);font-weight:800}
+
+.services{padding:5rem 2rem;text-align:center}
+.section-title{font-size:2.2rem;font-weight:800;margin-bottom:.5rem;color:var(--primary-dark)}
+.section-sub{color:#888;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.service-card{background:var(--white);border-radius:12px;padding:2rem 1.5rem;text-align:left;box-shadow:0 4px 20px rgba(21,101,192,.08);transition:transform .3s}
+.service-card:hover{transform:translateY(-4px)}
+.service-badge{display:inline-block;padding:.2rem .8rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:.8rem}
+.badge-urgent{background:#FFEBEE;color:var(--urgent)}
+.badge-std{background:var(--light);color:var(--primary)}
+.service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.service-card p{font-size:.9rem;color:#666}
+
+.urgence{padding:4rem 2rem;background:var(--urgent);color:var(--white);text-align:center}
+.urgence h2{font-size:2rem;font-weight:800;margin-bottom:1rem}
+.urgence p{font-size:1.1rem;opacity:.9;margin-bottom:2rem}
+.urgence-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--white);color:var(--urgent);padding:1rem 2.5rem;border-radius:8px;font-weight:700;font-size:1.1rem;transition:transform .3s}
+.urgence-btn:hover{transform:scale(1.05)}
+
+.contact{padding:5rem 2rem;background:var(--light);text-align:center}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:800px;margin:2rem auto 0}
+.contact-card{background:var(--white);padding:1.5rem;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.contact-card h3{color:var(--primary);font-size:.95rem;margin-bottom:.3rem}
+.contact-card p{font-size:.9rem;color:#555}
+
+footer{background:var(--primary-dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer .f-name{font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
+footer p{opacity:.6;font-size:.85rem}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .nav-links{display:none}
+  .hero-btns{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><span>🚨 Urgence plomberie ? Appelez le 06 78 90 12 34 — Intervention 7j/7</span></div>
+
+<nav class="nav">
+  <div class="nav-logo">Plombier <span>Martin</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#urgence">Urgence</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-urgent">🚨 Intervention rapide</span>
+    <h1>Votre plombier<br>disponible 7j/7</h1>
+    <p>Dépannage d'urgence, installation sanitaire, chauffage et salle de bain. Intervention rapide sur Toulouse et agglomération.</p>
+    <div class="hero-btns">
+      <a href="tel:0678901234" class="btn-phone">📞 06 78 90 12 34</a>
+      <a href="#contact" class="btn-devis">Demander un devis</a>
+    </div>
+  </div>
+</section>
+
+<div class="garanties">
+  <div class="garantie"><strong>30 min</strong>délai d'arrivée</div>
+  <div class="garantie"><strong>7j/7</strong>même le dimanche</div>
+  <div class="garantie"><strong>0 €</strong>déplacement offert</div>
+  <div class="garantie"><strong>2 ans</strong>garantie pièces</div>
+</div>
+
+<section class="services" id="services">
+  <h2 class="section-title">Nos services</h2>
+  <p class="section-sub">Plomberie, chauffage et sanitaire</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-badge badge-urgent">Urgence</span>
+      <h3>Dépannage urgence 7j/7</h3>
+      <p>Fuite d'eau, canalisation bouchée, ballon d'eau chaude en panne — intervention en moins de 30 minutes.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-badge badge-std">Installation</span>
+      <h3>Salle de bain</h3>
+      <p>Création et rénovation complète de salle de bain : douche italienne, baignoire, mobilier.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-badge badge-std">Confort</span>
+      <h3>Chauffage</h3>
+      <p>Installation et entretien de chaudière gaz, pompe à chaleur, plancher chauffant.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-badge badge-std">Sanitaire</span>
+      <h3>Sanitaire</h3>
+      <p>Remplacement de robinetterie, WC, chauffe-eau, adoucisseur d'eau et traitement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="urgence" id="urgence">
+  <h2>Une urgence plomberie ?</h2>
+  <p>Fuite, dégât des eaux, canalisation bouchée — nous intervenons en moins de 30 minutes, 7 jours sur 7.</p>
+  <a href="tel:0678901234" class="urgence-btn">📞 Appeler maintenant</a>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-sub">Nous sommes à votre service</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>📞 Urgence 24h/24</h3>
+      <p>06 78 90 12 34</p>
+    </div>
+    <div class="contact-card">
+      <h3>📧 Devis & RDV</h3>
+      <p>contact@plombier-martin.fr</p>
+    </div>
+    <div class="contact-card">
+      <h3>📍 Zone</h3>
+      <p>Toulouse et 30 km autour</p>
+    </div>
+    <div class="contact-card">
+      <h3>🕐 Disponibilité</h3>
+      <p>7j/7 — Jours fériés inclus</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-name">Plombier Martin</p>
+  <p>SIRET 456 789 012 00034 — Assurance décennale</p>
+  <p>© 2026 Plombier Martin. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

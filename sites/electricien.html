@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Électricien Durand — Électricité & Domotique</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#E65100;--primary-light:#FF6D00;--primary-dark:#BF360C;--dark:#1a1a1a;--gray:#f5f5f5;--white:#fff}
+body{font-family:'Roboto',sans-serif;color:var(--dark);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+.nav{background:var(--dark);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;color:var(--white)}
+.nav-logo span{color:var(--primary)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--white);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+.hero{background:var(--dark);color:var(--white);padding:5rem 2rem;position:relative;overflow:hidden}
+.hero-inner{max-width:800px}
+.hero-badge{display:inline-block;background:var(--primary);color:var(--white);padding:.3rem 1rem;border-radius:4px;font-size:.8rem;font-weight:600;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:1rem}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:1.1rem;opacity:.8;margin-bottom:2rem;max-width:550px}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--primary);color:var(--white);padding:1rem 2rem;border-radius:6px;font-weight:600;font-size:1rem;transition:background .3s}
+.hero-cta:hover{background:var(--primary-light)}
+.hero-phone{display:inline-flex;align-items:center;gap:.5rem;margin-left:1rem;color:var(--primary);font-weight:600;font-size:1.1rem}
+
+.trust{padding:3rem 2rem;background:var(--gray);display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;text-align:center}
+.trust-item{font-weight:600;font-size:.95rem}
+.trust-item strong{display:block;font-size:1.8rem;color:var(--primary);font-family:'Montserrat',sans-serif}
+
+.services{padding:5rem 2rem;text-align:center}
+.section-title{font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:800;margin-bottom:.5rem}
+.section-sub{color:#888;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.service-card{background:var(--white);border:2px solid #eee;border-radius:12px;padding:2rem 1.5rem;text-align:left;transition:border-color .3s,transform .3s}
+.service-card:hover{border-color:var(--primary);transform:translateY(-4px)}
+.service-icon{width:50px;height:50px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.4rem;margin-bottom:1rem}
+.service-card h3{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.service-card p{font-size:.9rem;color:#666}
+
+.cta-section{padding:4rem 2rem;background:var(--primary);color:var(--white);text-align:center}
+.cta-section h2{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;margin-bottom:1rem}
+.cta-section p{font-size:1.1rem;opacity:.9;margin-bottom:2rem}
+.cta-btn{display:inline-block;background:var(--white);color:var(--primary);padding:1rem 2.5rem;border-radius:6px;font-weight:700;font-size:1rem;transition:transform .3s}
+.cta-btn:hover{transform:translateY(-2px)}
+
+.contact{padding:5rem 2rem;background:var(--gray);text-align:center}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;max-width:800px;margin:2rem auto 0}
+.contact-card{background:var(--white);padding:2rem;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,.05)}
+.contact-card h3{font-family:'Montserrat',sans-serif;font-size:1rem;margin-bottom:.5rem;color:var(--primary)}
+.contact-card p{font-size:.95rem;color:#555}
+
+footer{background:var(--dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer .f-name{font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
+footer p{opacity:.6;font-size:.85rem}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .nav-links{display:none}
+  .hero-phone{display:block;margin-left:0;margin-top:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Électricien <span>Durand</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#devis">Devis gratuit</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">Certifié Qualifelec</span>
+    <h1>Votre électricien<br><span>de confiance</span></h1>
+    <p>Électricité générale et domotique pour particuliers et professionnels. Intervention rapide, travail soigné, devis gratuit.</p>
+    <a href="#devis" class="hero-cta">⚡ Devis gratuit</a>
+    <span class="hero-phone">📞 06 45 67 89 01</span>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trust-item"><strong>15+</strong>ans d'expérience</div>
+  <div class="trust-item"><strong>500+</strong>chantiers réalisés</div>
+  <div class="trust-item"><strong>100%</strong>aux normes NF C 15-100</div>
+  <div class="trust-item"><strong>48h</strong>délai d'intervention</div>
+</div>
+
+<section class="services" id="services">
+  <h2 class="section-title">Nos services</h2>
+  <p class="section-sub">Des solutions complètes pour tous vos besoins électriques</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Mise aux normes</h3>
+      <p>Diagnostic, remise en conformité NF C 15-100 et obtention du Consuel.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Installation tableau</h3>
+      <p>Remplacement et installation de tableau électrique, disjoncteurs et différentiels.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Domotique</h3>
+      <p>Maison connectée : éclairage intelligent, volets roulants, thermostat connecté.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔌</div>
+      <h3>Bornes IRVE</h3>
+      <p>Installation de bornes de recharge pour véhicules électriques, certifié IRVE.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="devis">
+  <h2>Demandez votre devis gratuit</h2>
+  <p>Réponse sous 24h — intervention sous 48h sur tout le département</p>
+  <a href="#contact" class="cta-btn">Demander un devis</a>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-sub">Nous sommes à votre écoute</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>📞 Téléphone</h3>
+      <p>06 45 67 89 01<br>Lun-Ven : 8h-18h / Sam : 9h-12h</p>
+    </div>
+    <div class="contact-card">
+      <h3>📧 Email</h3>
+      <p>contact@electricien-durand.fr</p>
+    </div>
+    <div class="contact-card">
+      <h3>📍 Zone d'intervention</h3>
+      <p>Marseille et Bouches-du-Rhône (13)</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="f-name">Électricien Durand</p>
+  <p>SIRET 123 456 789 00012 — Certifié Qualifelec</p>
+  <p>© 2026 Électricien Durand. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

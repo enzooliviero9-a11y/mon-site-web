@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARTISAN WEB — Sites vitrines pour artisans</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & DESIGN SYSTEM ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0a0a08;--paper:#f2efe8;--accent:#e8400c;--dim:#6b6860;
+  --line:rgba(10,10,8,0.12);
+  --f-display:'Bebas Neue',sans-serif;
+  --f-mono:'IBM Plex Mono',monospace;
+  --f-body:'Barlow',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);color:var(--ink);background:var(--paper);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%;display:block}
+
+/* ── INTRO SCREEN ── */
+#intro-screen{
+  position:fixed;inset:0;z-index:10000;
+  background:#0a0a08;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+#intro-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#intro-screen svg{max-width:700px;width:85vw}
+#intro-screen svg text{
+  font-family:var(--f-display);font-size:120px;
+  fill:none;stroke:#e8400c;stroke-width:1.5;
+  stroke-dasharray:1200;stroke-dashoffset:1200;
+  filter:drop-shadow(0 0 8px rgba(232,64,12,.6)) drop-shadow(0 0 25px rgba(232,64,12,.3));
+}
+#intro-screen svg text.animate-stroke{
+  animation:drawStroke 2.5s ease forwards;
+}
+@keyframes drawStroke{
+  to{stroke-dashoffset:0}
+}
+#intro-screen svg text.fill-in{
+  animation:drawStroke 2.5s ease forwards, fillText .6s 2.3s ease forwards;
+}
+@keyframes fillText{
+  to{fill:rgba(232,64,12,.9);stroke-width:0}
+}
+body.intro-active{overflow:hidden}
+
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width .1s}
+
+/* ── CUSTOM CURSOR ── */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9998;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor-dot{width:6px;height:6px;background:var(--accent)}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(--accent);opacity:.5;transition:width .2s,height .2s,opacity .2s}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  background:rgba(242,239,232,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  transform:translateY(-100%);transition:transform .4s ease;
+}
+.nav.visible{transform:translateY(0)}
+.nav-logo{font-family:var(--f-display);font-size:1.8rem;color:var(--ink);letter-spacing:.04em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-family:var(--f-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);transition:color .3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-family:var(--f-mono);font-size:.8rem;padding:.6rem 1.4rem;border:1.5px solid var(--ink);color:var(--ink);text-transform:uppercase;letter-spacing:.06em;transition:all .3s}
+.nav-cta:hover{background:var(--ink);color:var(--paper)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:8rem 2rem 6rem;position:relative;
+}
+.hero-tag{
+  font-family:var(--f-mono);font-size:.85rem;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--dim);margin-bottom:2rem;
+}
+.hero h1{
+  font-family:var(--f-display);font-size:clamp(3rem,10vw,8rem);
+  line-height:.9;letter-spacing:.02em;color:var(--ink);
+  margin-bottom:2rem;
+}
+.hero h1 span{color:var(--accent)}
+.hero-sub{
+  font-size:1.15rem;color:var(--dim);max-width:520px;
+  line-height:1.7;margin-bottom:3rem;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{
+  font-family:var(--f-mono);font-size:.85rem;padding:.9rem 2.2rem;
+  background:var(--accent);color:var(--paper);border:none;
+  text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:transform .3s,box-shadow .3s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,64,12,.3)}
+.btn-secondary{
+  font-family:var(--f-mono);font-size:.85rem;padding:.9rem 2.2rem;
+  background:transparent;color:var(--ink);border:1.5px solid var(--ink);
+  text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:all .3s;
+}
+.btn-secondary:hover{background:var(--ink);color:var(--paper)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--dim);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+}
+.hero-scroll .arrow{width:1px;height:40px;background:var(--dim);position:relative;overflow:hidden}
+.hero-scroll .arrow::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:var(--accent);animation:scrollArrow 2s infinite;
+}
+@keyframes scrollArrow{0%{top:-100%}100%{top:100%}}
+
+/* ── TICKER / MARQUEE ── */
+.ticker{
+  padding:1.5rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;white-space:nowrap;
+}
+.ticker-track{
+  display:flex;gap:3rem;
+  animation:ticker 30s linear infinite;
+}
+.ticker-track span{
+  font-family:var(--f-display);font-size:1.8rem;color:var(--dim);
+  opacity:.4;white-space:nowrap;
+}
+.ticker-track span .dot{color:var(--accent);margin:0 1.5rem}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION COMMON ── */
+.section{padding:7rem 3rem}
+.section-label{
+  font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:1rem;
+}
+.section-title{
+  font-family:var(--f-display);font-size:clamp(2rem,5vw,3.5rem);
+  line-height:1;margin-bottom:1.5rem;
+}
+.section-desc{font-size:1.05rem;color:var(--dim);max-width:550px;line-height:1.7}
+
+/* ── SHOWCASE (CAROUSEL) ── */
+#showcase{background:var(--ink);color:var(--paper);overflow:hidden}
+#showcase .section-label{color:var(--accent)}
+.showcase-header{text-align:center;margin-bottom:3rem}
+.carousel-wrapper{position:relative;padding:0 1rem}
+.carousel-track{
+  display:flex;gap:2rem;
+  transition:transform .6s cubic-bezier(.25,.8,.25,1);
+}
+.carousel-card{
+  flex:0 0 calc(33.333% - 1.33rem);
+  min-width:300px;position:relative;
+}
+.browser-frame{
+  background:#1a1a1a;border-radius:12px;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.browser-bar{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.7rem 1rem;background:#2a2a2a;
+}
+.browser-dot{width:10px;height:10px;border-radius:50%}
+.browser-dot.r{background:#ff5f57}
+.browser-dot.y{background:#ffbd2e}
+.browser-dot.g{background:#28c840}
+.browser-bar-url{
+  flex:1;margin-left:.8rem;padding:.3rem .8rem;
+  background:#1a1a1a;border-radius:4px;
+  font-family:var(--f-mono);font-size:.65rem;color:#888;
+}
+.browser-viewport{
+  width:100%;height:400px;overflow:hidden;position:relative;
+}
+.browser-viewport iframe{
+  width:100%;height:100%;border:none;
+  pointer-events:none;
+}
+.iframe-scroller{
+  width:100%;position:relative;overflow:hidden;height:400px;
+}
+.iframe-scroller iframe{
+  width:100%;border:none;pointer-events:none;
+  position:absolute;top:0;left:0;
+  animation:autoScroll 10s ease-in-out infinite;
+}
+@keyframes autoScroll{
+  0%,10%{transform:translateY(0)}
+  45%,55%{transform:translateY(-60%)}
+  90%,100%{transform:translateY(0)}
+}
+.card-label{
+  padding:1rem;text-align:center;
+}
+.card-label h3{font-family:var(--f-display);font-size:1.4rem;letter-spacing:.03em}
+.card-label p{font-family:var(--f-mono);font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+
+.carousel-nav{
+  display:flex;justify-content:center;align-items:center;gap:1.5rem;
+  margin-top:2.5rem;
+}
+.carousel-btn{
+  width:48px;height:48px;border-radius:50%;
+  border:1.5px solid rgba(242,239,232,.3);background:transparent;
+  color:var(--paper);font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.carousel-btn:hover{border-color:var(--accent);color:var(--accent)}
+.carousel-dots{display:flex;gap:.5rem}
+.carousel-dots .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(242,239,232,.25);cursor:pointer;
+  transition:all .3s;
+}
+.carousel-dots .dot.active{background:var(--accent);transform:scale(1.3)}
+
+/* ── PROCESS ── */
+.process-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:2rem;margin-top:3rem;counter-reset:step;
+}
+.process-step{
+  padding:2rem;border:1px solid var(--line);position:relative;
+  transition:transform .3s;
+}
+.process-step:hover{transform:translateY(-4px)}
+.process-step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  font-family:var(--f-display);font-size:3rem;color:var(--accent);opacity:.3;
+  position:absolute;top:.8rem;right:1rem;line-height:1;
+}
+.process-step h3{font-family:var(--f-display);font-size:1.5rem;margin-bottom:.5rem}
+.process-step p{font-size:.9rem;color:var(--dim);line-height:1.6}
+
+/* ── STATS ── */
+#stats{background:var(--ink);color:var(--paper)}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:2rem;margin-top:3rem;text-align:center;
+}
+.stat-item .stat-number{
+  font-family:var(--f-display);font-size:4rem;color:var(--accent);line-height:1;
+}
+.stat-item .stat-label{
+  font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--dim);margin-top:.5rem;
+}
+
+/* ── ARGUMENTS ── */
+.args-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;margin-top:3rem;
+}
+.arg-card{padding:2rem;border:1px solid var(--line);transition:transform .3s}
+.arg-card:hover{transform:translateY(-4px)}
+.arg-icon{font-size:2rem;margin-bottom:1rem}
+.arg-card h3{font-family:var(--f-display);font-size:1.5rem;margin-bottom:.5rem}
+.arg-card p{font-size:.9rem;color:var(--dim);line-height:1.6}
+
+/* ── TARIFS ── */
+.tarifs-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;margin-top:3rem;
+}
+.tarif-card{
+  padding:2.5rem 2rem;border:1px solid var(--line);
+  text-align:center;transition:transform .3s,box-shadow .3s;
+}
+.tarif-card:hover{transform:translateY(-4px)}
+.tarif-card.featured{border:2px solid var(--accent);position:relative}
+.tarif-card.featured::before{
+  content:'POPULAIRE';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;
+  background:var(--accent);color:var(--paper);padding:.3rem 1rem;
+}
+.tarif-name{font-family:var(--f-display);font-size:1.8rem;margin-bottom:.5rem}
+.tarif-price{font-family:var(--f-display);font-size:3.5rem;color:var(--accent);line-height:1}
+.tarif-price span{font-size:1rem;color:var(--dim)}
+.tarif-features{margin:1.5rem 0;text-align:left}
+.tarif-features li{
+  padding:.5rem 0;border-bottom:1px solid var(--line);
+  font-size:.9rem;color:var(--dim);
+}
+.tarif-features li::before{content:'✓ ';color:var(--accent);font-weight:700}
+
+/* ── CTA FINALE ── */
+#cta-final{background:var(--accent);color:var(--paper);text-align:center}
+#cta-final .section-title{color:var(--paper)}
+#cta-final .section-desc{color:rgba(242,239,232,.8);margin:0 auto 2rem}
+.btn-cta-white{
+  font-family:var(--f-mono);font-size:.85rem;padding:1rem 2.5rem;
+  background:var(--paper);color:var(--accent);border:none;
+  text-transform:uppercase;letter-spacing:.06em;cursor:pointer;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-cta-white:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.2)}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);color:var(--paper);
+  padding:4rem 3rem 2rem;
+}
+.footer-top{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:3rem;
+  padding-bottom:3rem;border-bottom:1px solid rgba(242,239,232,.1);
+}
+.footer-brand .footer-logo{font-family:var(--f-display);font-size:2rem;margin-bottom:.5rem}
+.footer-brand .footer-logo span{color:var(--accent)}
+.footer-brand p{font-size:.9rem;color:var(--dim);max-width:300px}
+.footer-col h4{
+  font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--dim);margin-bottom:1rem;
+}
+.footer-col a{display:block;font-size:.9rem;color:rgba(242,239,232,.7);margin-bottom:.5rem;transition:color .3s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:2rem;flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{font-family:var(--f-mono);font-size:.7rem;color:var(--dim);letter-spacing:.05em}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .carousel-card{flex:0 0 calc(50% - 1rem);min-width:280px}
+}
+@media(max-width:768px){
+  .section{padding:5rem 1.5rem}
+  .nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:6rem 1.5rem 4rem}
+  .carousel-card{flex:0 0 100%;min-width:0}
+  .footer-top{flex-direction:column}
+}
+</style>
+</head>
+<body class="intro-active">
+
+<!-- INTRO SCREEN -->
+<div id="intro-screen">
+  <svg viewBox="0 0 660 140" xmlns="http://www.w3.org/2000/svg">
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle">ARTISAN</text>
+    <text x="50%" y="95%" dominant-baseline="middle" text-anchor="middle" style="font-size:80px">WEB</text>
+  </svg>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">ARTISAN <span>WEB</span></div>
+  <ul class="nav-links">
+    <li><a href="#showcase">Réalisations</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+  </ul>
+  <a href="#cta-final" class="nav-cta">Démarrer un projet</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <p class="hero-tag">Sites vitrines pour artisans</p>
+  <h1>Votre vitrine<br><span>digitale</span></h1>
+  <p class="hero-sub">Je crée des sites vitrines professionnels pour artisans locaux. Rapide, efficace, livré en 48h.</p>
+  <div class="hero-btns">
+    <a href="#cta-final" class="btn-primary">Démarrer un projet</a>
+    <a href="#showcase" class="btn-secondary">Voir les réalisations</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> COIFFEUR <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER</span>
+    <span>BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> COIFFEUR <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER</span>
+  </div>
+</div>
+
+<!-- SHOWCASE / CARROUSEL -->
+<section class="section" id="showcase">
+  <div class="showcase-header">
+    <p class="section-label">Réalisations</p>
+    <h2 class="section-title">Nos derniers sites clients</h2>
+    <p class="section-desc" style="margin:0 auto">Des sites vitrines professionnels, livrés clé en main.</p>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carousel-track">
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">coiffeur-elegance.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/coiffeur.html" loading="lazy" title="Coiffeur Élégance"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Coiffeur Élégance</h3><p>Salon de coiffure</p></div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">boulangerie-dupont.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/boulanger.html" loading="lazy" title="Boulangerie Dupont"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Boulangerie Dupont</h3><p>Boulanger & pâtissier</p></div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">electricien-durand.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/electricien.html" loading="lazy" title="Électricien Durand"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Électricien Durand</h3><p>Électricité & domotique</p></div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">maconnerie-lefevre.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/macon.html" loading="lazy" title="Maçonnerie Lefèvre"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Maçonnerie Lefèvre</h3><p>Maçon & gros œuvre</p></div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">charpente-moreau.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/charpentier.html" loading="lazy" title="Charpente Moreau"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Charpente Moreau</h3><p>Charpentier & couvreur</p></div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
+            <span class="browser-bar-url">plombier-martin.fr</span>
+          </div>
+          <div class="iframe-scroller">
+            <iframe src="sites/plombier.html" loading="lazy" title="Plombier Martin"></iframe>
+          </div>
+        </div>
+        <div class="card-label"><h3>Plombier Martin</h3><p>Plomberie & chauffage</p></div>
+      </div>
+
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="carousel-prev">&#8592;</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="carousel-next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <p class="section-label">Process</p>
+  <h2 class="section-title reveal">Comment ça marche</h2>
+  <p class="section-desc reveal">Un processus simple et rapide pour obtenir votre site vitrine.</p>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <h3>Échange</h3>
+      <p>On discute de votre activité, vos besoins et vos préférences en 15 minutes par téléphone.</p>
+    </div>
+    <div class="process-step reveal">
+      <h3>Maquette</h3>
+      <p>Je crée une première version de votre site en 24h et vous l'envoie pour validation.</p>
+    </div>
+    <div class="process-step reveal">
+      <h3>Ajustements</h3>
+      <p>On affine ensemble les détails : couleurs, textes, photos, jusqu'à ce que tout soit parfait.</p>
+    </div>
+    <div class="process-step reveal">
+      <h3>Livraison</h3>
+      <p>Votre site est mis en ligne avec nom de domaine et hébergement inclus. Vous êtes en ligne !</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section" id="stats">
+  <p class="section-label">Chiffres</p>
+  <h2 class="section-title reveal" style="color:var(--paper)">Ils nous font confiance</h2>
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="47">0</div>
+      <div class="stat-label">Sites livrés</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="48" data-suffix="h">0</div>
+      <div class="stat-label">Délai moyen</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="100" data-suffix="%">0</div>
+      <div class="stat-label">Clients satisfaits</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="12">0</div>
+      <div class="stat-label">Métiers couverts</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARGUMENTS -->
+<section class="section" id="arguments">
+  <p class="section-label">Pourquoi nous</p>
+  <h2 class="section-title reveal">Les bonnes raisons de nous choisir</h2>
+  <div class="args-grid">
+    <div class="arg-card reveal">
+      <div class="arg-icon">⚡</div>
+      <h3>Rapidité</h3>
+      <p>Votre site est prêt en 48 heures. Pas de semaines d'attente, pas de réunions interminables.</p>
+    </div>
+    <div class="arg-card reveal">
+      <div class="arg-icon">💰</div>
+      <h3>Prix juste</h3>
+      <p>Des tarifs adaptés aux artisans et TPE. Pas de surprise, tout est inclus dans le prix annoncé.</p>
+    </div>
+    <div class="arg-card reveal">
+      <div class="arg-icon">📱</div>
+      <h3>100% responsive</h3>
+      <p>Votre site s'adapte à tous les écrans : mobile, tablette, ordinateur. Vos clients vous trouvent partout.</p>
+    </div>
+    <div class="arg-card reveal">
+      <div class="arg-icon">🔧</div>
+      <h3>Clé en main</h3>
+      <p>Nom de domaine, hébergement, mise en ligne : on s'occupe de tout, vous n'avez rien à faire.</p>
+    </div>
+    <div class="arg-card reveal">
+      <div class="arg-icon">🎨</div>
+      <h3>Design sur mesure</h3>
+      <p>Chaque site est unique et adapté à votre métier. Pas de template générique, un vrai design professionnel.</p>
+    </div>
+    <div class="arg-card reveal">
+      <div class="arg-icon">🤝</div>
+      <h3>Accompagnement</h3>
+      <p>Un interlocuteur unique qui vous accompagne avant, pendant et après la mise en ligne de votre site.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="section" id="tarifs">
+  <p class="section-label">Tarifs</p>
+  <h2 class="section-title reveal">Une offre claire, sans surprise</h2>
+  <p class="section-desc reveal">Choisissez la formule adaptée à vos besoins.</p>
+  <div class="tarifs-grid">
+    <div class="tarif-card reveal">
+      <div class="tarif-name">Essentiel</div>
+      <div class="tarif-price">490€ <span>HT</span></div>
+      <ul class="tarif-features">
+        <li>Site vitrine 1 page</li>
+        <li>Design responsive</li>
+        <li>Formulaire de contact</li>
+        <li>Hébergement 1 an inclus</li>
+        <li>Livré en 48h</li>
+      </ul>
+      <a href="#cta-final" class="btn-secondary" style="display:inline-block;margin-top:1rem">Choisir</a>
+    </div>
+    <div class="tarif-card featured reveal">
+      <div class="tarif-name">Pro</div>
+      <div class="tarif-price">890€ <span>HT</span></div>
+      <ul class="tarif-features">
+        <li>Site vitrine multi-pages</li>
+        <li>Design premium sur mesure</li>
+        <li>Galerie photos / portfolio</li>
+        <li>Optimisation SEO</li>
+        <li>Hébergement 1 an inclus</li>
+        <li>Livré en 48h</li>
+      </ul>
+      <a href="#cta-final" class="btn-primary" style="display:inline-block;margin-top:1rem">Choisir</a>
+    </div>
+    <div class="tarif-card reveal">
+      <div class="tarif-name">Sur mesure</div>
+      <div class="tarif-price">Sur devis</div>
+      <ul class="tarif-features">
+        <li>Fonctionnalités avancées</li>
+        <li>Réservation en ligne</li>
+        <li>E-commerce</li>
+        <li>Design entièrement custom</li>
+        <li>Maintenance incluse</li>
+      </ul>
+      <a href="#cta-final" class="btn-secondary" style="display:inline-block;margin-top:1rem">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section" id="cta-final">
+  <p class="section-label" style="color:var(--paper);opacity:.6">Prêt ?</p>
+  <h2 class="section-title reveal">Lancez votre site vitrine</h2>
+  <p class="section-desc reveal">Contactez-nous et recevez votre site en 48h. Simple, rapide, professionnel.</p>
+  <button class="btn-cta-white reveal" onclick="window.location.href='mailto:contact@artisan-web.fr'">Démarrer maintenant</button>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">ARTISAN <span>WEB</span></div>
+      <p>Sites vitrines professionnels pour artisans locaux. Rapide, efficace, livré en 48h.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#showcase">Réalisations</a>
+      <a href="#process">Process</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#cta-final">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:contact@artisan-web.fr">contact@artisan-web.fr</a>
+      <a href="tel:+33612345678">06 12 34 56 78</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ARTISAN WEB. Tous droits réservés.</p>
+    <p>Fait avec passion pour les artisans.</p>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   1. INTRO ANIMATION — ARTISAN WEB
+   ══════════════════════════════════════ */
+(function(){
+  const intro = document.getElementById('intro-screen');
+  const texts = intro.querySelectorAll('text');
+
+  // Trigger stroke animation
+  requestAnimationFrame(()=>{
+    texts.forEach(t => t.classList.add('fill-in'));
+  });
+
+  // Hide intro after animation completes
+  setTimeout(()=>{
+    intro.classList.add('hidden');
+    document.body.classList.remove('intro-active');
+  }, 3200);
+})();
+
+/* ══════════════════════════════════════
+   2. CUSTOM CURSOR
+   ══════════════════════════════════════ */
+(function(){
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if(!dot||!ring) return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function animate(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animate)})();
+  document.querySelectorAll('a,button,.carousel-btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.opacity='.3'});
+    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.5'});
+  });
+})();
+
+/* ══════════════════════════════════════
+   3. NAV SHOW/HIDE ON SCROLL
+   ══════════════════════════════════════ */
+(function(){
+  const nav = document.getElementById('nav');
+  let lastY = 0;
+  window.addEventListener('scroll',()=>{
+    const y = window.scrollY;
+    if(y > 300) nav.classList.add('visible'); else nav.classList.remove('visible');
+    lastY = y;
+  });
+})();
+
+/* ══════════════════════════════════════
+   4. PROGRESS BAR
+   ══════════════════════════════════════ */
+(function(){
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll',()=>{
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / h * 100) + '%';
+  });
+})();
+
+/* ══════════════════════════════════════
+   5. REVEAL ON SCROLL
+   ══════════════════════════════════════ */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:.15});
+  els.forEach(el=>obs.observe(el));
+})();
+
+/* ══════════════════════════════════════
+   6. STAT COUNTERS
+   ══════════════════════════════════════ */
+(function(){
+  const nums = document.querySelectorAll('.stat-number[data-target]');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(()=>{
+        current += step;
+        if(current >= target){current = target; clearInterval(timer)}
+        el.textContent = current + suffix;
+      }, 25);
+      obs.unobserve(el);
+    });
+  },{threshold:.5});
+  nums.forEach(n=>obs.observe(n));
+})();
+
+/* ══════════════════════════════════════
+   7. CAROUSEL
+   ══════════════════════════════════════ */
+(function(){
+  const track = document.getElementById('carousel-track');
+  const dotsWrap = document.getElementById('carousel-dots');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const cards = track.querySelectorAll('.carousel-card');
+  const total = cards.length;
+  let idx = 0;
+  let autoTimer;
+
+  function getVisible(){
+    const w = window.innerWidth;
+    if(w < 768) return 1;
+    if(w < 1024) return 2;
+    return 3;
+  }
+
+  // Create dots
+  function buildDots(){
+    dotsWrap.innerHTML = '';
+    const pages = total - getVisible() + 1;
+    for(let i=0;i<pages;i++){
+      const d = document.createElement('span');
+      d.className = 'dot' + (i===idx?' active':'');
+      d.addEventListener('click',()=>goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(i){
+    const vis = getVisible();
+    const maxIdx = total - vis;
+    idx = Math.max(0, Math.min(i, maxIdx));
+    const gap = 32; // 2rem
+    const cardW = cards[0].offsetWidth + gap;
+    track.style.transform = 'translateX(-' + (idx * cardW) + 'px)';
+    // Update dots
+    dotsWrap.querySelectorAll('.dot').forEach((d,j)=>{
+      d.className = 'dot' + (j===idx?' active':'');
+    });
+    resetAuto();
+  }
+
+  function next(){ goTo(idx + 1 >= total - getVisible() + 1 ? 0 : idx + 1) }
+  function prev(){ goTo(idx - 1 < 0 ? total - getVisible() : idx - 1) }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 5500);
+  }
+
+  buildDots();
+  resetAuto();
+  window.addEventListener('resize', ()=>{ buildDots(); goTo(Math.min(idx, total - getVisible())) });
+})();
+</script>
+
+</body>
+</html>

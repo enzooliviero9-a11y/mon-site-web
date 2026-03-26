@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boulangerie-Pâtisserie Dupont</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#C0392B;--primary-light:#E74C3C;--primary-dark:#922B21;--cream:#fdf6f0;--brown:#3e2723;--white:#fff}
+body{font-family:'Open Sans',sans-serif;color:var(--brown);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+.nav{background:var(--cream);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(192,57,43,.1);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;color:var(--primary)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+.hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary-light));color:var(--white);padding:6rem 2rem;text-align:center;position:relative}
+.hero::after{content:'🥖';position:absolute;right:10%;top:50%;transform:translateY(-50%);font-size:6rem;opacity:.15}
+.hero h1{font-family:'Libre Baskerville',serif;font-size:3rem;margin-bottom:1rem}
+.hero p{font-size:1.15rem;opacity:.9;max-width:550px;margin:0 auto 2rem}
+.hero-btn{display:inline-block;background:var(--white);color:var(--primary);padding:.85rem 2.2rem;border-radius:8px;font-weight:700;transition:transform .3s}
+.hero-btn:hover{transform:translateY(-2px)}
+
+.about{padding:5rem 2rem;background:var(--cream);text-align:center}
+.section-title{font-family:'Libre Baskerville',serif;font-size:2.3rem;margin-bottom:.5rem;color:var(--primary-dark)}
+.section-sub{color:#888;margin-bottom:3rem}
+.about-text{max-width:700px;margin:0 auto;font-size:1.05rem;line-height:1.8}
+
+.products{padding:5rem 2rem;text-align:center}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
+.product-card{background:var(--cream);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(192,57,43,.08);transition:transform .3s}
+.product-card:hover{transform:translateY(-4px)}
+.product-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.product-card h3{font-family:'Libre Baskerville',serif;padding:.8rem 1rem .2rem;font-size:1.1rem}
+.product-card p{padding:0 1rem 1.2rem;font-size:.9rem;color:#777}
+
+.gallery{padding:5rem 2rem;background:var(--cream);text-align:center}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.gallery-item{aspect-ratio:3/2;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:1.1rem}
+
+.contact{padding:5rem 2rem;text-align:center}
+.contact-info{max-width:500px;margin:2rem auto;font-size:1.05rem;line-height:2}
+.contact-btn{display:inline-block;background:var(--primary);color:var(--white);padding:.85rem 2.5rem;border-radius:8px;font-weight:700;margin-top:1rem;transition:background .3s}
+.contact-btn:hover{background:var(--primary-dark)}
+
+footer{background:var(--primary-dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer .f-name{font-family:'Libre Baskerville',serif;font-size:1.3rem;margin-bottom:.5rem}
+footer p{opacity:.7;font-size:.9rem}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .nav-links{display:none}
+  .hero::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Boulangerie Dupont</div>
+  <ul class="nav-links">
+    <li><a href="#produits">Nos produits</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Le goût de<br>la tradition</h1>
+  <p>Boulangerie-pâtisserie artisanale depuis 1987. Pains au levain, viennoiseries dorées et pâtisseries fines, préparés chaque matin avec passion.</p>
+  <a href="#produits" class="hero-btn">Découvrir nos produits</a>
+</section>
+
+<section class="about">
+  <h2 class="section-title">Notre savoir-faire</h2>
+  <p class="section-sub">Trois générations de passion</p>
+  <p class="about-text">Depuis plus de 35 ans, la famille Dupont perpétue l'art de la boulangerie-pâtisserie artisanale. Farines sélectionnées, levain naturel, cuisson au four à sole : chaque produit est le fruit d'un savoir-faire transmis de génération en génération.</p>
+</section>
+
+<section class="products" id="produits">
+  <h2 class="section-title">Nos produits</h2>
+  <p class="section-sub">Fabriqués chaque jour avec des ingrédients de qualité</p>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#F5E6CC,#EDCBA0)">🍞</div>
+      <h3>Pains au levain</h3>
+      <p>Tradition, campagne, complet, seigle — croûte croustillante et mie aérée.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#FDEBD0,#F5CBA7)">🥐</div>
+      <h3>Viennoiseries</h3>
+      <p>Croissants pur beurre, pains au chocolat, brioches feuilletées.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#FADBD8,#F1948A)">🍰</div>
+      <h3>Pâtisseries fines</h3>
+      <p>Éclairs, tartes aux fruits, millefeuilles, Paris-Brest et macarons.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:linear-gradient(135deg,#F9E79F,#F4D03F)">🎂</div>
+      <h3>Gâteaux sur commande</h3>
+      <p>Anniversaires, mariages, événements — créations personnalisées.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="galerie">
+  <h2 class="section-title">Galerie</h2>
+  <p class="section-sub">Un aperçu de notre vitrine</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background:linear-gradient(135deg,#C0392B,#E74C3C)">Nos pains du jour</div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#922B21,#C0392B)">Vitrine pâtisserie</div>
+    <div class="gallery-item" style="background:linear-gradient(135deg,#E74C3C,#F1948A)">Viennoiseries du matin</div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Nous trouver</h2>
+  <p class="section-sub">Passez nous voir !</p>
+  <div class="contact-info">
+    <p>📍 24 rue du Four, 69003 Lyon</p>
+    <p>📞 04 78 12 34 56</p>
+    <p>🕐 Ouvert du mardi au dimanche, 6h30 - 19h30</p>
+  </div>
+  <a href="#" class="contact-btn">Commander un gâteau</a>
+</section>
+
+<footer>
+  <p class="f-name">Boulangerie-Pâtisserie Dupont</p>
+  <p>24 rue du Four, 69003 Lyon</p>
+  <p>© 2026 Boulangerie Dupont. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

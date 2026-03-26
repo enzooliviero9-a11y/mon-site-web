@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coiffeur Élégance — Salon de coiffure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#7B1FA2;--primary-light:#9C27B0;--primary-dark:#4A148C;--text:#2d2d2d;--light:#f9f5fc;--white:#fff}
+body{font-family:'Lato',sans-serif;color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{background:var(--white);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 20px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:var(--white);padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,.1),transparent);border-radius:50%}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.5rem;margin-bottom:1rem;position:relative}
+.hero p{font-size:1.2rem;opacity:.9;max-width:600px;margin:0 auto 2rem}
+.hero-btn{display:inline-block;background:var(--white);color:var(--primary);padding:.9rem 2.5rem;border-radius:50px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;transition:transform .3s,box-shadow .3s}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.2)}
+
+/* SERVICES */
+.services{padding:5rem 2rem;background:var(--light);text-align:center}
+.section-title{font-family:'Playfair Display',serif;font-size:2.5rem;margin-bottom:.5rem;color:var(--primary-dark)}
+.section-sub{color:#777;margin-bottom:3rem;font-size:1.05rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
+.service-card{background:var(--white);padding:2.5rem 1.5rem;border-radius:16px;box-shadow:0 4px 20px rgba(123,31,162,.08);transition:transform .3s,box-shadow .3s}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(123,31,162,.15)}
+.service-icon{width:60px;height:60px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;color:var(--white);font-size:1.5rem}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem}
+.service-card p{font-size:.95rem;color:#666}
+
+/* GALERIE */
+.gallery{padding:5rem 2rem;text-align:center}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.gallery-item{aspect-ratio:4/3;border-radius:12px;overflow:hidden;position:relative}
+.gallery-item .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--white);font-weight:700}
+
+/* RESERVATION */
+.reservation{padding:5rem 2rem;background:var(--light);text-align:center}
+.form-wrap{max-width:500px;margin:2rem auto 0;text-align:left}
+.form-wrap label{display:block;font-weight:700;margin-bottom:.3rem;font-size:.9rem}
+.form-wrap input,.form-wrap select,.form-wrap textarea{width:100%;padding:.8rem 1rem;border:2px solid #e0d5e8;border-radius:10px;margin-bottom:1rem;font-family:inherit;font-size:.95rem;transition:border-color .3s}
+.form-wrap input:focus,.form-wrap select:focus,.form-wrap textarea:focus{outline:none;border-color:var(--primary)}
+.form-btn{width:100%;padding:1rem;background:var(--primary);color:var(--white);border:none;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;transition:background .3s}
+.form-btn:hover{background:var(--primary-dark)}
+
+/* FOOTER */
+footer{background:var(--primary-dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer p{opacity:.7;font-size:.9rem}
+footer .footer-name{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;opacity:1}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+  .nav-links{display:none}
+  .services-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Coiffeur Élégance</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#reservation">Réserver</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Votre beauté,<br>notre passion</h1>
+  <p>Salon de coiffure au cœur de la ville. Coupes tendance, colorations sur mesure et coiffures événementielles dans une ambiance élégante.</p>
+  <a href="#reservation" class="hero-btn">Prendre rendez-vous</a>
+</section>
+
+<section class="services" id="services">
+  <h2 class="section-title">Nos prestations</h2>
+  <p class="section-sub">Un savoir-faire adapté à chaque style</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂</div>
+      <h3>Coupes femme & homme</h3>
+      <p>Coupe personnalisée, adaptée à votre morphologie et votre style de vie.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Colorations</h3>
+      <p>Couleurs vibrantes et naturelles, produits professionnels respectueux du cheveu.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <h3>Balayage & mèches</h3>
+      <p>Jeux de lumière subtils pour un résultat solaire et moderne.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👰</div>
+      <h3>Coiffure mariée</h3>
+      <p>Chignons, tresses et coiffures sur mesure pour votre jour J.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="galerie">
+  <h2 class="section-title">Notre galerie</h2>
+  <p class="section-sub">Quelques-unes de nos réalisations</p>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="placeholder" style="background:linear-gradient(135deg,#9C27B0,#E1BEE7)">Coupe tendance</div></div>
+    <div class="gallery-item"><div class="placeholder" style="background:linear-gradient(135deg,#7B1FA2,#CE93D8)">Coloration cuivrée</div></div>
+    <div class="gallery-item"><div class="placeholder" style="background:linear-gradient(135deg,#4A148C,#BA68C8)">Balayage naturel</div></div>
+    <div class="gallery-item"><div class="placeholder" style="background:linear-gradient(135deg,#6A1B9A,#AB47BC)">Chignon mariée</div></div>
+  </div>
+</section>
+
+<section class="reservation" id="reservation">
+  <h2 class="section-title">Réservation</h2>
+  <p class="section-sub">Prenez rendez-vous en quelques clics</p>
+  <div class="form-wrap">
+    <label>Nom complet</label>
+    <input type="text" placeholder="Marie Dupont">
+    <label>Téléphone</label>
+    <input type="tel" placeholder="06 12 34 56 78">
+    <label>Prestation souhaitée</label>
+    <select>
+      <option>Coupe femme</option>
+      <option>Coupe homme</option>
+      <option>Coloration</option>
+      <option>Balayage & mèches</option>
+      <option>Coiffure mariée</option>
+    </select>
+    <label>Message (optionnel)</label>
+    <textarea rows="3" placeholder="Précisez vos souhaits..."></textarea>
+    <button class="form-btn">Réserver maintenant</button>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-name">Coiffeur Élégance</p>
+  <p>12 rue de la Beauté, 75009 Paris — 01 23 45 67 89</p>
+  <p>© 2026 Coiffeur Élégance. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

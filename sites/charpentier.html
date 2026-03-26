@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charpente Moreau — Charpentier & Couvreur</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#2E7D32;--primary-light:#43A047;--primary-dark:#1B5E20;--wood:#f7f2ed;--bark:#3e2a1a;--white:#fff}
+body{font-family:'Nunito',sans-serif;color:var(--bark);line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+.nav{background:var(--wood);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--primary);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Bitter',serif;font-size:1.4rem;font-weight:700;color:var(--primary-dark)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;transition:color .3s}
+.nav-links a:hover{color:var(--primary)}
+
+.hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--primary-light));color:var(--white);padding:6rem 2rem;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E")}
+.hero h1{font-family:'Bitter',serif;font-size:3.2rem;margin-bottom:1rem;position:relative}
+.hero p{font-size:1.15rem;opacity:.9;max-width:600px;margin:0 auto 2rem;position:relative}
+.hero-btn{display:inline-block;background:var(--white);color:var(--primary-dark);padding:.9rem 2.5rem;border-radius:6px;font-weight:700;position:relative;transition:transform .3s}
+.hero-btn:hover{transform:translateY(-2px)}
+
+.savoir-faire{padding:5rem 2rem;background:var(--wood);text-align:center}
+.section-title{font-family:'Bitter',serif;font-size:2.3rem;margin-bottom:.5rem;color:var(--primary-dark)}
+.section-sub{color:#888;margin-bottom:3rem}
+.sf-content{max-width:700px;margin:0 auto;font-size:1.05rem;line-height:1.9}
+
+.services{padding:5rem 2rem;text-align:center}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.service-card{background:var(--wood);border-radius:12px;padding:2rem 1.5rem;text-align:left;border-top:4px solid var(--primary);transition:transform .3s}
+.service-card:hover{transform:translateY(-4px)}
+.service-icon{font-size:2rem;margin-bottom:.8rem}
+.service-card h3{font-family:'Bitter',serif;font-size:1.15rem;margin-bottom:.5rem;color:var(--primary-dark)}
+.service-card p{font-size:.9rem;color:#666}
+
+.realisations{padding:5rem 2rem;background:var(--wood);text-align:center}
+.real-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.real-item{aspect-ratio:16/10;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:'Bitter',serif;font-size:1.1rem}
+
+.cta{padding:5rem 2rem;background:var(--primary);color:var(--white);text-align:center}
+.cta h2{font-family:'Bitter',serif;font-size:2.3rem;margin-bottom:1rem}
+.cta p{font-size:1.1rem;opacity:.85;margin-bottom:2rem}
+.cta-btn{display:inline-block;background:var(--white);color:var(--primary-dark);padding:1rem 2.5rem;border-radius:6px;font-weight:700;transition:transform .3s}
+.cta-btn:hover{transform:translateY(-2px)}
+
+.contact{padding:5rem 2rem;text-align:center}
+.contact-info{max-width:500px;margin:2rem auto;font-size:1.05rem;line-height:2.2}
+
+footer{background:var(--primary-dark);color:var(--white);text-align:center;padding:2.5rem 2rem}
+footer .f-name{font-family:'Bitter',serif;font-size:1.3rem;margin-bottom:.5rem}
+footer p{opacity:.6;font-size:.85rem}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">🌲 Charpente Moreau</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>L'art du bois,<br>au service de votre toit</h1>
+  <p>Charpentier-couvreur depuis 3 générations. Charpente traditionnelle, ossature bois, couverture et zinguerie — un savoir-faire artisanal d'exception.</p>
+  <a href="#contact" class="hero-btn">Demander un devis</a>
+</section>
+
+<section class="savoir-faire">
+  <h2 class="section-title">Notre savoir-faire</h2>
+  <p class="section-sub">Artisans du bois depuis 1968</p>
+  <p class="sf-content">L'entreprise Moreau perpétue depuis trois générations l'art de la charpente traditionnelle. Chaque projet est conçu sur mesure, avec des bois sélectionnés pour leur qualité et leur durabilité. Du petit projet de rénovation à la grande charpente neuve, nous mettons notre expertise au service de votre patrimoine.</p>
+</section>
+
+<section class="services" id="services">
+  <h2 class="section-title">Nos services</h2>
+  <p class="section-sub">Des solutions bois complètes</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Charpente traditionnelle</h3>
+      <p>Conception et pose de charpentes en bois massif, assemblages traditionnels tenon-mortaise.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏡</div>
+      <h3>Ossature bois</h3>
+      <p>Construction à ossature bois pour maisons, extensions et surélévations.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Couverture</h3>
+      <p>Pose et rénovation de toiture : tuiles, ardoises, zinc et bac acier.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💧</div>
+      <h3>Zinguerie</h3>
+      <p>Gouttières, chéneaux, noues et raccords en zinc pour une étanchéité parfaite.</p>
+    </div>
+  </div>
+</section>
+
+<section class="realisations" id="realisations">
+  <h2 class="section-title">Réalisations</h2>
+  <p class="section-sub">Nos derniers chantiers</p>
+  <div class="real-grid">
+    <div class="real-item" style="background:linear-gradient(135deg,#2E7D32,#66BB6A)">Charpente grange rénovée</div>
+    <div class="real-item" style="background:linear-gradient(135deg,#1B5E20,#43A047)">Maison ossature bois</div>
+    <div class="real-item" style="background:linear-gradient(135deg,#388E3C,#81C784)">Couverture ardoise</div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Un projet de charpente ou couverture ?</h2>
+  <p>Devis gratuit sous 48h — Déplacement offert dans un rayon de 50 km</p>
+  <a href="#contact" class="cta-btn">Nous contacter</a>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-info">
+    <p>📍 Atelier : Route de la Forêt, 44000 Nantes</p>
+    <p>📞 02 40 12 34 56</p>
+    <p>📧 contact@charpente-moreau.fr</p>
+    <p>🕐 Lun-Ven : 7h-17h</p>
+  </div>
+</section>
+
+<footer>
+  <p class="f-name">Charpente Moreau</p>
+  <p>RGE Qualibat — Assurance décennale</p>
+  <p>© 2026 Charpente Moreau. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
