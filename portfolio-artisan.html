@@ -205,6 +205,13 @@ body.intro-active{overflow:hidden}
 }
 .card-label h3{font-family:var(--f-display);font-size:1.4rem;letter-spacing:.03em}
 .card-label p{font-family:var(--f-mono);font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.card-link{
+  display:inline-block;margin-top:.6rem;
+  font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--accent);border:1px solid var(--accent);padding:.4rem 1rem;
+  border-radius:4px;transition:all .3s;
+}
+.card-link:hover{background:var(--accent);color:var(--paper)}
 
 .carousel-nav{
   display:flex;justify-content:center;align-items:center;gap:1.5rem;
@@ -395,8 +402,8 @@ body.intro-active{overflow:hidden}
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span>BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> COIFFEUR <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER</span>
-    <span>BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> COIFFEUR <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER</span>
+    <span>TOUS MÉTIERS <span class="dot">•</span> BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER <span class="dot">•</span> ET BIEN PLUS ENCORE <span class="dot">•</span></span>
+    <span>TOUS MÉTIERS <span class="dot">•</span> BOULANGER <span class="dot">•</span> PLOMBIER <span class="dot">•</span> ÉLECTRICIEN <span class="dot">•</span> MAÇON <span class="dot">•</span> CHARPENTIER <span class="dot">•</span> PEINTRE <span class="dot">•</span> MENUISIER <span class="dot">•</span> ET BIEN PLUS ENCORE <span class="dot">•</span></span>
   </div>
 </div>
 
@@ -410,17 +417,17 @@ body.intro-active{overflow:hidden}
   <div class="carousel-wrapper">
     <div class="carousel-track" id="carousel-track">
 
-      <div class="carousel-card">
+      <div class="carousel-card" data-href="sites/charles-renovation.html">
         <div class="browser-frame">
           <div class="browser-bar">
             <span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span>
-            <span class="browser-bar-url">coiffeur-elegance.fr</span>
+            <span class="browser-bar-url">charles-renovation.fr</span>
           </div>
           <div class="iframe-scroller">
-            <iframe src="sites/coiffeur.html" loading="lazy" title="Coiffeur Élégance"></iframe>
+            <iframe src="sites/charles-renovation.html" loading="lazy" title="Charles Rénovation"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Coiffeur Élégance</h3><p>Salon de coiffure</p></div>
+        <div class="card-label"><h3>Charles Rénovation</h3><p>Rénovation intérieure & extérieure</p><a href="sites/charles-renovation.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
       <div class="carousel-card">
@@ -433,7 +440,7 @@ body.intro-active{overflow:hidden}
             <iframe src="sites/boulanger.html" loading="lazy" title="Boulangerie Dupont"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Boulangerie Dupont</h3><p>Boulanger & pâtissier</p></div>
+        <div class="card-label"><h3>Boulangerie Dupont</h3><p>Boulanger & pâtissier</p><a href="sites/boulanger.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
       <div class="carousel-card">
@@ -446,7 +453,7 @@ body.intro-active{overflow:hidden}
             <iframe src="sites/electricien.html" loading="lazy" title="Électricien Durand"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Électricien Durand</h3><p>Électricité & domotique</p></div>
+        <div class="card-label"><h3>Électricien Durand</h3><p>Électricité & domotique</p><a href="sites/electricien.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
       <div class="carousel-card">
@@ -459,7 +466,7 @@ body.intro-active{overflow:hidden}
             <iframe src="sites/macon.html" loading="lazy" title="Maçonnerie Lefèvre"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Maçonnerie Lefèvre</h3><p>Maçon & gros œuvre</p></div>
+        <div class="card-label"><h3>Maçonnerie Lefèvre</h3><p>Maçon & gros œuvre</p><a href="sites/macon.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
       <div class="carousel-card">
@@ -472,7 +479,7 @@ body.intro-active{overflow:hidden}
             <iframe src="sites/charpentier.html" loading="lazy" title="Charpente Moreau"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Charpente Moreau</h3><p>Charpentier & couvreur</p></div>
+        <div class="card-label"><h3>Charpente Moreau</h3><p>Charpentier & couvreur</p><a href="sites/charpentier.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
       <div class="carousel-card">
@@ -485,7 +492,7 @@ body.intro-active{overflow:hidden}
             <iframe src="sites/plombier.html" loading="lazy" title="Plombier Martin"></iframe>
           </div>
         </div>
-        <div class="card-label"><h3>Plombier Martin</h3><p>Plomberie & chauffage</p></div>
+        <div class="card-label"><h3>Plombier Martin</h3><p>Plomberie & chauffage</p><a href="sites/plombier.html" target="_blank" class="card-link">Voir le site →</a></div>
       </div>
 
     </div>
@@ -540,8 +547,8 @@ body.intro-active{overflow:hidden}
       <div class="stat-label">Clients satisfaits</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-number" data-target="12">0</div>
-      <div class="stat-label">Métiers couverts</div>
+      <div class="stat-number" data-target="5" data-suffix="★">0</div>
+      <div class="stat-label">Note moyenne</div>
     </div>
   </div>
 </section>
@@ -622,6 +629,7 @@ body.intro-active{overflow:hidden}
         <li>Fonctionnalités avancées</li>
         <li>Réservation en ligne</li>
         <li>E-commerce</li>
+        <li>Agent IA</li>
         <li>Design entièrement custom</li>
         <li>Maintenance incluse</li>
       </ul>
